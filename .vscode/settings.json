@@ -1,0 +1,9 @@
+{
+  // This project uses SQLite, not SQL Server: stop the mssql extension
+  // from flagging SQLite syntax (strftime, USING, IF NOT EXISTS) as errors
+  "mssql.intelliSense.enableErrorChecking": false,
+
+  // Use macOS's sqlite3 instead of the vscode-sqlite extension's bundled
+  // binary, which rejects the extension's own double-quoted queries
+  "sqlite.sqlite3": "/usr/bin/sqlite3"
+}

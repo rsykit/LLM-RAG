@@ -46,6 +46,7 @@ A **query router** (one LLM classification call) decides which path each questio
 LLM-RAG/
 ├── app.py                  # Streamlit chat interface
 ├── src/
+│   ├── download_data.py    # Download the Kaggle dataset into data/raw/
 │   ├── load_db.py          # Load raw CSVs into SQLite and create KPI views
 │   ├── export_tableau.py   # Export KPI views to CSV for Tableau
 │   ├── build_index.py      # Embed review text and build the FAISS index
@@ -83,11 +84,10 @@ OPENAI_API_KEY=sk-...
 
 The dataset isn't included in this repo because of its size and license.
 
-1. Download the [Olist Brazilian E-Commerce dataset](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) from Kaggle.
-2. Unzip the CSVs into `data/raw/`.
-3. Build the database and the vector index:
+The first script downloads the [Olist Brazilian E-Commerce dataset](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) from Kaggle. The rest build the database, the vector index and the Tableau exports:
 
 ```bash
+python src/download_data.py    # → data/raw/*.csv (9 files, ~120 MB)
 python src/load_db.py          # → data/olist.db
 python src/build_index.py      # → index/faiss_reviews (embedding cost < $1)
 python src/export_tableau.py   # → data/tableau/*.csv
